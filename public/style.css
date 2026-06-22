@@ -1,0 +1,2430 @@
+body {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    direction: rtl;
+    text-align: center;
+    background:
+        radial-gradient(circle at top, rgba(255, 215, 90, 0.18), transparent 12%),
+        linear-gradient(180deg, #182235 0%, #0f1320 100%);
+    color: #f7f3e8;
+    margin: 0;
+    padding: 0;
+}
+
+.main-menu-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    background:
+        radial-gradient(circle at top, rgba(255, 220, 120, 0.08), transparent 18%),
+        linear-gradient(135deg, rgba(22, 30, 50, 0.96), rgba(8, 12, 22, 0.98));
+}
+
+.main-menu-shell {
+    width: min(980px, 100%);
+    background: linear-gradient(180deg, rgba(29, 39, 61, 0.96), rgba(12, 18, 32, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    padding: 24px;
+}
+
+.main-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.main-menu-header h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #fffaf0;
+}
+
+.menu-badge {
+    margin: 0 0 6px;
+    color: #f2bf54;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.menu-icon-btn,
+.hero-play-btn,
+.menu-card {
+    font-family: inherit;
+}
+
+.menu-icon-btn {
+    min-width: 90px;
+    height: 52px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #f1c45b, #d89d24);
+    color: #2a1b05;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.2;
+    white-space: nowrap;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(216, 157, 36, 0.3);
+}
+
+.main-menu-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px;
+    border-radius: 22px;
+    background:
+        linear-gradient(90deg, rgba(241, 196, 91, 0.12), rgba(255, 255, 255, 0.04)),
+        linear-gradient(180deg, #162033, #0f1523);
+    border: 1px solid rgba(241, 196, 91, 0.18);
+    margin-bottom: 18px;
+}
+
+.main-menu-hero h2 {
+    margin: 8px 0 0;
+    font-size: 28px;
+    color: #fffaf0;
+}
+
+.hero-pill {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(241, 196, 91, 0.14);
+    color: #ffd56d;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.hero-play-btn {
+    border: none;
+    border-radius: 16px;
+    padding: 14px 22px;
+    background: linear-gradient(180deg, #f2c86d, #d99a22);
+    color: #311d04;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(217, 154, 34, 0.35);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.menu-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 110px;
+    padding: 12px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #23314f, #151d31);
+    color: #f8f4e8;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    white-space: normal;
+    word-break: keep-all;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(180deg, #2c3e69, #1a2440);
+}
+
+.menu-card-icon {
+    font-size: 14px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background: white;
+    color: #111;
+    width: min(420px, 90%);
+    padding: 30px 24px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.login-card h1 {
+    margin-top: 0;
+}
+
+.auth-form-block {
+    text-align: center;
+    margin-top: 18px;
+}
+
+.auth-form-block form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.auth-form-block input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.switch-auth {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: #0a58ca;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+.login-error {
+    color: #c0392b;
+    min-height: 22px;
+    margin-bottom: 0;
+}
+
+.user-welcome {
+    margin: 0 0 12px;
+    font-size: 18px;
+}
+
+button {
+    padding: 15px 25px;
+    margin: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-around;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.top-player {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.middle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.side-player {
+    text-align: center;
+}
+
+.field {
+    border: 2px solid white;
+    border-radius: 15px;
+    padding: 20px;
+    width: 1000px;
+    min-height: 150px;
+}
+
+.stack {
+    width: 60px;
+    height: 80px;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    font-size: 30px;
+}
+
+.top-visible-card {
+    width: 90px;
+    height: 60px;
+}
+
+.top-visible-card img,
+.top-visible-card .simple-card-image {
+    transform: rotate(90deg);
+    width: 60px;
+    height: 85px;
+}
+
+.top-visible-card {
+    width: 100px;
+    height: 75px;
+    overflow: visible;
+}
+
+.my-stack {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.my-cards {
+    text-align: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.cards {
+    position: relative;
+    width: 650px;
+    max-width: 100%;
+    height: 180px;
+    margin: 0 auto;
+    overflow: visible;
+    display: block;
+}
+
+.cards .card {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: 0 !important;
+    transform-origin: bottom center;
+    transition: 0.2s;
+}
+.card {
+    width: 100px;
+    height: 140px;
+    padding: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: transparent;
+    display: inline-block;
+}
+
+.red {
+    color: red;
+}
+
+.black {
+    color: black;
+}
+
+.joker {
+    color: purple;
+}
+.field-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 10px;
+}
+.selected {
+    border: 4px solid gold;
+    transform: translateY(-10px);
+}
+#objection-box {
+    text-align: center;
+    font-size: 28px;
+    color: gold;
+    margin: 15px;
+}
+.card {
+    position: relative;
+}
+
+.can-object {
+    border: 4px solid gold !important;
+    box-shadow: 0 0 15px gold;
+    transform: translateY(-8px);
+}
+
+.object-badge {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: gold;
+    color: black;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+#game-message {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, #22314d, #0f172a);
+    color: #eef6ff;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 700;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#game-message.show {
+    opacity: 1;
+}
+
+.help-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 7, 16, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    backdrop-filter: blur(6px);
+}
+
+.help-modal {
+    width: min(420px, 92vw);
+    background: linear-gradient(180deg, #f3e8bf, #d7ad55);
+    color: #21160b;
+    border-radius: 22px;
+    padding: 22px 18px;
+    box-shadow: 0 18px 44px rgba(0,0,0,.38);
+    position: relative;
+    text-align: right;
+}
+
+.help-modal h3 {
+    margin: 0 0 12px;
+    font-size: 22px;
+}
+
+.help-modal ul {
+    margin: 0;
+    padding-right: 18px;
+    line-height: 1.7;
+}
+
+.help-close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: #1f1f1f;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.exit-confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 7, 16, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    backdrop-filter: blur(6px);
+}
+
+.exit-confirm-modal {
+    width: min(420px, 92vw);
+    background: linear-gradient(180deg, #1f2a46, #101725);
+    color: #fff;
+    border-radius: 22px;
+    padding: 26px 22px;
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+}
+
+.exit-confirm-icon {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.exit-confirm-modal h3 {
+    margin: 0 0 8px;
+    font-size: 24px;
+}
+
+.exit-confirm-modal p {
+    margin: 0 0 18px;
+    color: #c9d7f7;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.exit-confirm-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.exit-confirm-actions button {
+    border: none;
+    border-radius: 14px;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.exit-confirm-cancel {
+    background: #eef2ff;
+    color: #1a2240;
+}
+
+.exit-confirm-confirm {
+    background: linear-gradient(180deg, #f2c86d, #d99a22);
+    color: #311d04;
+}
+.pending-card {
+    color: gold;
+    font-weight: bold;
+}
+.pending-card {
+    color: gold;
+    font-weight: bold;
+}
+#objection-box {
+    height: 45px;
+    line-height: 45px;
+    font-size: 28px;
+    color: gold;
+    text-align: center;
+    margin: 10px 0;
+}
+
+#waitingBox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    backdrop-filter: blur(4px);
+}
+
+.waiting-card{
+    background: linear-gradient(180deg, #14213d, #0d1021);
+    color:#f8f5ea;
+    padding:34px 26px;
+    border-radius:22px;
+    text-align:center;
+    min-width:300px;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 18px 45px rgba(0,0,0,.4);
+}
+
+.waiting-room-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    background:
+        radial-gradient(circle at top, rgba(255, 212, 94, 0.08), transparent 18%),
+        linear-gradient(180deg, #132036, #0b1020);
+}
+
+.waiting-room-card {
+    width: min(860px, 100%);
+    background: linear-gradient(180deg, #1d2d52, #10182d);
+    border-radius: 26px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+}
+
+.waiting-room-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 22px 24px;
+    background: linear-gradient(90deg, rgba(241, 196, 91, 0.1), rgba(255, 255, 255, 0.04));
+}
+
+.waiting-room-header h1 {
+    margin: 0;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #fff9e6;
+    word-break: break-all;
+}
+
+.waiting-room-body {
+    padding: 22px 24px 28px;
+}
+
+.waiting-room-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    color: #eef3ff;
+}
+
+.waiting-room-seats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.seat-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(180deg, #26365d, #1a2745);
+    border-radius: 16px;
+    padding: 14px;
+    color: #f9f5e8;
+    text-align: right;
+}
+
+.seat-item strong {
+    display: block;
+    font-size: 16px;
+}
+
+.seat-item small {
+    color: #c8d6ff;
+}
+
+.seat-number {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(241, 196, 91, 0.12);
+    color: #ffd96a;
+    font-weight: 800;
+}
+
+.my-seat {
+    border: 1px solid rgba(241, 196, 91, 0.35);
+}
+
+.empty-seat {
+    color: #b9c7ef;
+}
+
+.seat-tag {
+    display: inline-block;
+    margin-right: 6px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: rgba(241, 196, 91, 0.16);
+    color: #ffd96a;
+    font-size: 11px;
+}
+
+.deck-select {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.deck-select h3 {
+    margin: 0 0 10px;
+    color: #fff7d9;
+}
+
+.deck-options {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.deck-options button {
+    min-width: 52px;
+    background: #233a63;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-weight: 700;
+}
+
+.waiting-room-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
+    pointer-events: none;
+}
+
+#capture-stack .card,
+#player-stack .card,
+.stack .card {
+    width: 70px;
+    height: 98px;
+}
+
+.simple-card-image {
+    width: 80px;
+    height: 112px;
+    object-fit: contain;
+    display: block;
+}
+
+.cards,
+.cards .card,
+.card-image {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+
+body {
+    background:
+        radial-gradient(circle at top, rgba(255, 220, 130, 0.08), transparent 18%),
+        linear-gradient(180deg, #0c1220 0%, #0a0f18 100%);
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.game-table {
+    width: 1000px;
+    min-height: 800px;
+    margin: 20px auto;
+    background:
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 42%),
+        linear-gradient(180deg, #d5b078 0%, #8b5f39 100%);
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.top-player {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.left-player {
+    position: absolute;
+    left: 40px;
+    top: 45%;
+    transform: translateY(-50%);
+}
+
+.right-player {
+    position: absolute;
+    right: 40px;
+    top: 45%;
+    transform: translateY(-50%);
+}
+
+.field {
+    position: absolute;
+    top: 280px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+}
+
+.my-cards {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+}
+
+.field {
+    background:
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.06), transparent 38%),
+        linear-gradient(180deg, #7f572f 0%, #5b3723 100%);
+    box-shadow:
+        inset 0 0 18px rgba(0, 0, 0, 0.18),
+        0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 70px;
+}
+
+.action-buttons button {
+    width: 145px;
+    height: 45px;
+    border-radius: 16px;
+    border: none;
+    background: linear-gradient(180deg, #fff8d8, #d4bb73);
+    color: #35240b;
+    font-weight: 800;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+}
+
+.player-card {
+    width: 90px;
+    background: linear-gradient(180deg, #f7f5ef, #d9d0ba);
+    border-radius: 16px;
+    padding: 8px;
+    text-align: center;
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.player-avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background: linear-gradient(180deg, #f4f4f4, #cfcfcf);
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+}
+
+.player-name {
+    margin-top: 6px;
+    background: linear-gradient(180deg, #ffffff, #ececec);
+    border-radius: 10px;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-weight: 800;
+    color: #1f1f1f;
+}
+
+.exit-btn {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    width: 120px;
+    height: 46px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #fff7cd, #d5ad48);
+    color: #312104;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.24);
+    font-weight: 800;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.player-avatar{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    border:3px solid #ddd;
+}
+
+.active-player .player-avatar {
+    border: 4px solid #44ff66;
+    box-shadow:
+        0 0 10px #44ff66,
+        0 0 20px #44ff66,
+        0 0 30px #44ff66;
+}
+
+.player-name {
+    color: #000;              /* أسود */
+    background: #f2f2f2;
+    border-radius: 12px;
+    padding: 4px 10px;
+    font-size: 15px;
+    font-weight: bold;
+
+    display: inline-block;   /* الحجم حسب النص */
+    width: fit-content;      /* الصندوق على قد الاسم */
+    max-width: 120px;        /* لا يكبر زيادة */
+    margin: 6px auto 0;
+
+    white-space: nowrap;     /* يمنع النزول لسطر جديد */
+    overflow: hidden;
+    text-overflow: ellipsis; /* إذا الاسم طويل جداً يظهر ... */
+}
+
+.bottom-profile {
+    margin-top: -25px;
+    z-index: 20;
+}
+
+.bottom-avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 3px solid #8b5b2e;
+    background: #ddd;
+}
+
+.bottom-name {
+    background: linear-gradient(#555, #333);
+    color: #fff;
+    padding: 6px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.active-avatar {
+    box-shadow:
+        0 0 10px #44ff66,
+        0 0 20px #44ff66,
+        0 0 30px #44ff66;
+}
+
+
+.my-cards {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 560px;
+    height: 150px;
+
+    background: linear-gradient(#4a4a4a, #1f1f1f);
+    border-radius: 22px;
+    box-shadow: 0 -3px 10px rgba(0,0,0,.45);
+    padding-top: 15px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+     overflow: visible;
+    z-index: 999;
+    
+}
+
+
+
+.bottom-profile{
+    position:absolute;
+    right:20px;
+    bottom:45px;
+
+    display:flex;
+    flex-direction:row;   /* مهم */
+    align-items:center;
+    gap:12px;
+
+    direction:ltr;        /* مهم */
+}
+
+.bottom-name {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 20px;
+    border-radius: 6px;
+
+    background: transparent;
+
+    box-shadow:
+        inset 0 4px 8px rgba(0,0,0,.8),
+        inset 0 -2px 2px rgba(255,255,255,.08);
+
+    text-shadow:
+        0 1px 1px rgba(255,255,255,.08),
+        0 -1px 2px rgba(0,0,0,.9);
+
+    position: relative;
+    top: -55px;
+}
+
+.bottom-avatar{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    border:4px solid #8b5a2b;
+    background:#fff;
+
+    position: relative;
+    top: -35px;
+}
+
+.cards {
+    position: relative;
+    width: 650px;
+    max-width: 100%;
+    height: 180px;
+    margin: 0 auto;
+    overflow: visible;
+    display: block;
+
+     
+    top: -70px;
+    z-index: 0;
+}
+
+.my-cards{
+    position: absolute;
+    z-index: 10;
+}
+
+.cards-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 55px;
+    z-index: 1;
+}
+
+.cards {
+    position: relative;
+    z-index: 0;
+}
+
+.side-panel{
+    position:absolute;
+    top:20px;
+    left:20px;
+
+    background:linear-gradient(#4f4f4f,#222);
+    padding:12px;
+    border-radius:18px;
+
+    display:flex;
+    gap:10px;
+    z-index:1000;
+}
+
+.panel-btn{
+    width:70px;
+    height:60px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(#f5f5f5,#cfcfcf);
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.score-panel{
+    position:absolute;
+    top:110px;   /* تحت الأزرار الأربعة */
+    left:-20px;
+
+    width:280px;
+    background:linear-gradient(#4a4a4a,#222);
+    border-radius:15px;
+    padding:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.5);
+}
+
+.score-panel table{
+    width:100%;
+    border-collapse:collapse;
+    text-align:center;
+    color:#fff;
+}
+
+.score-panel th{
+    background:#3b3b3b;
+    padding:8px;
+    font-size:18px;
+}
+
+.score-panel td{
+    background:#2a2a2a;
+    padding:12px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.left-panel{
+    position: fixed;
+    top: 35px;
+    left: 20px;
+    width: 390px;
+
+    background: linear-gradient(#3f3f3f, #1f1f1f);
+    border-radius: 22px;
+    padding: 18px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    z-index: 9999;
+}
+
+.side-panel{
+    position: static !important;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+
+.panel-btn{
+    width: 70px;
+    height: 55px;
+
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(#f7f7f7, #cfcfcf);
+
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    padding: 0;
+    margin: 0;
+}
+
+.score-panel{
+    position: static !important;
+    width: 100%;
+
+    background: linear-gradient(#3a3a3a, #202020);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,.45);
+}
+
+.score-panel table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    color: #fff;
+}
+
+.score-panel th{
+    background: rgba(255,255,255,.08);
+    padding: 8px;
+    font-size: 20px;
+}
+
+.score-panel td{
+    padding: 10px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.top-player .top-stack-row {
+    width: 90px !important;
+    height: 70px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: visible !important;
+}
+
+.top-player .top-stack-row .simple-card-image {
+    transform: rotate(90deg) !important;
+    width: 60px !important;
+    height: 85px !important;
+    object-fit: contain !important;
+}
+.top-player .simple-card-image {
+    transform: rotate(90deg);
+    transform-origin: center;
+}
+
+.back-card {
+    width: 42px;
+    height: 60px;
+    border-radius: 6px;
+    border: 2px solid white;
+    background: repeating-linear-gradient(
+        45deg,
+        #123b5c,
+        #123b5c 4px,
+        #e8f1f8 4px,
+        #e8f1f8 7px
+    );
+}
+
+.top-back-cards {
+    position: relative;
+    width: 90px;
+    height: 55px;
+    margin-top: -25px; /* ارفع الأوراق */
+}
+
+.top-back-cards .back-card {
+    position: absolute;
+    width: 42px;
+    height: 60px;
+    left: 25%;
+    top: 0;
+    transform-origin: bottom center;
+}
+
+/* الورقة الأولى */
+.top-back-cards .back-card:nth-child(1) {
+    transform: translateX(-30px) rotate(-18deg);
+}
+
+/* الثانية */
+.top-back-cards .back-card:nth-child(2) {
+    transform: translateX(-20px) rotate(-12deg);
+}
+
+/* الثالثة */
+.top-back-cards .back-card:nth-child(3) {
+    transform: translateX(-10px) rotate(-6deg);
+}
+
+/* الرابعة */
+.top-back-cards .back-card:nth-child(4) {
+    transform: translateX(0px) rotate(0deg);
+}
+
+/* الخامسة */
+.top-back-cards .back-card:nth-child(5) {
+    transform: translateX(10px) rotate(6deg);
+}
+
+/* السادسة */
+.top-back-cards .back-card:nth-child(6) {
+    transform: translateX(20px) rotate(12deg);
+}
+
+/* السابعة */
+.top-back-cards .back-card:nth-child(7) {
+    transform: translateX(30px) rotate(18deg);
+}
+
+/* أي ورقة زيادة */
+.top-back-cards .back-card:nth-child(n+8) {
+    transform: translateX(30px) rotate(18deg);
+}
+
+.top-player {
+    position: relative;
+}
+
+.top-back-cards {
+    position: absolute;
+    top: -20px;      /* عدل الرقم حسب المكان */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.top-player .player-card {
+    position: relative;
+    z-index: 2;
+}
+
+
+.side-back-cards {
+    position: relative;
+    width: 90px;
+    height: 55px;
+    margin-top: -150px;
+}
+
+.side-back-cards .back-card {
+    position: absolute;
+    width: 42px;
+    height: 60px;
+    left: 25%;
+    top: 0;
+    transform-origin: bottom center;
+}
+
+/* نفس توزيع العلوي */
+.side-back-cards .back-card:nth-child(1) {
+    transform: translateX(-30px) rotate(-18deg);
+}
+
+.side-back-cards .back-card:nth-child(2) {
+    transform: translateX(-20px) rotate(-12deg);
+}
+
+.side-back-cards .back-card:nth-child(3) {
+    transform: translateX(-10px) rotate(-6deg);
+}
+
+.side-back-cards .back-card:nth-child(4) {
+    transform: translateX(0px) rotate(0deg);
+}
+
+.side-back-cards .back-card:nth-child(5) {
+    transform: translateX(10px) rotate(6deg);
+}
+
+.side-back-cards .back-card:nth-child(6) {
+    transform: translateX(20px) rotate(12deg);
+}
+
+.side-back-cards .back-card:nth-child(7) {
+    transform: translateX(30px) rotate(18deg);
+}
+
+.side-back-cards .back-card:nth-child(n+8) {
+    transform: translateX(30px) rotate(18deg);
+}
+
+.top-player,
+.left-side,
+.right-side {
+    position: relative;
+}
+
+.top-back-cards,
+.side-back-cards {
+    position: absolute;
+    z-index: 1;
+}
+
+.player-card {
+    position: relative;
+    z-index: 5;
+}
+
+
+
+/* ==============================
+   Kammlna layout for Mujabeed
+   مأخوذ من فكرة كملنا: حاوية شاشة كاملة، لوحة يسار، وطاولة ثابتة تتصغر مع الشاشة
+============================== */
+
+html {
+    box-sizing: border-box;
+    overflow-y: hidden;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    background: #444;
+}
+
+/* اللوحة اليسرى */
+.left-panel {
+    position: fixed !important;
+    top: 35px !important;
+    left: 20px !important;
+    width: 360px !important;
+    z-index: 9999 !important;
+}
+
+/* الطاولة: ثابتة مثل كملنا وتتصغر كاملة إذا صغرت الشاشة */
+.game-table {
+    width: 1000px !important;
+    height: 800px !important;
+    min-height: 800px !important;
+
+    position: absolute !important;
+    top: 20px !important;
+    left: 340px !important;
+
+    margin: 0 !important;
+
+    background: #d8bd8c;
+    border-radius: 14px;
+    overflow: hidden;
+
+    transform-origin: top left;
+    transform: scale(
+        min(
+            1,
+            calc((100vw - 380px) / 1000),
+            calc((100vh - 40px) / 800)
+        )
+    );
+}
+
+/* شاشة ضيقة جدًا */
+@media (max-width: 900px) {
+    body {
+        overflow: auto;
+    }
+
+    .left-panel {
+        position: relative !important;
+        width: min(360px, 95vw) !important;
+        margin: 10px auto !important;
+        left: auto !important;
+        top: auto !important;
+    }
+
+    .game-table {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        margin: 10px auto !important;
+
+        transform-origin: top center;
+        transform: scale(
+            min(
+                1,
+                calc(95vw / 1000),
+                calc((100vh - 40px) / 800)
+            )
+        );
+    }
+}
+
+
+/* ==============================
+   ترتيب الطاولة والميدان وصناديق اللاعبين
+   ============================== */
+
+/* حجم الطاولة الحالي */
+.game-table {
+    width: 930px !important;
+    height: 770px !important;
+    min-height: 770px !important;
+}
+
+/* اللاعب العلوي */
+.top-player {
+    position: absolute !important;
+    top: 78px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
+    z-index: 20 !important;
+}
+
+/* الصف الأوسط */
+.middle-row {
+    position: absolute !important;
+    top: 235px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 270px !important;
+
+    margin: 0 !important;
+    display: block !important;
+}
+
+/* اللاعب اليسار */
+.left-side {
+    position: absolute !important;
+    left: 22px !important;
+    top: 35px !important;
+    width: 115px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    z-index: 25 !important;
+}
+
+/* اللاعب اليمين */
+.right-side {
+    position: absolute !important;
+    right: 22px !important;
+    top: 35px !important;
+    width: 115px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    z-index: 25 !important;
+}
+
+/* الميدان في الوسط */
+.field {
+    position: absolute !important;
+    top: 30px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+
+    width: 650px !important;
+    min-height: 180px !important;
+    padding: 18px !important;
+
+    background: #7b5130 !important;
+    border: 2px solid white !important;
+    border-radius: 15px !important;
+    z-index: 10 !important;
+}
+
+/* أوراق الميدان */
+.field-cards {
+    min-height: 95px !important;
+    gap: 6px !important;
+    padding: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+}
+
+/* تصغير أوراق الميدان قليلًا حتى ما تزاحم */
+.field .card {
+    width: 54px !important;
+    height: 76px !important;
+}
+
+.field .card-image {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* تجميع اللاعب */
+.my-stack {
+    position: absolute !important;
+    top: 505px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+
+    margin: 0 !important;
+    z-index: 18 !important;
+}
+
+.my-stack h3 {
+    margin: 0 0 5px !important;
+    font-size: 20px !important;
+}
+
+/* أوراق يد اللاعب */
+.cards-wrapper {
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 116px !important;
+    transform: translateX(-50%) !important;
+    z-index: 15 !important;
+}
+
+.cards {
+    width: 650px !important;
+    height: 170px !important;
+    top: 0 !important;
+}
+
+/* صندوق اللاعب السفلي */
+.my-cards {
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 0 !important;
+    transform: translateX(-50%) !important;
+
+    width: 560px !important;
+    height: 145px !important;
+    z-index: 30 !important;
+}
+
+/* ترتيب الأزرار داخل صندوق اللاعب */
+.action-buttons {
+    margin-top: 72px !important;
+    gap: 15px !important;
+}
+
+.action-buttons button {
+    width: 140px !important;
+    height: 43px !important;
+    font-size: 15px !important;
+}
+
+/* صندوق بيانات اللاعب */
+.player-card {
+    width: 88px !important;
+    min-height: 92px !important;
+    padding: 7px !important;
+}
+
+.player-avatar {
+    width: 58px !important;
+    height: 58px !important;
+}
+
+.player-name {
+    font-size: 14px !important;
+    padding: 3px 8px !important;
+}
+
+/* أوراق اليد الخلفية فوق/خلف اللاعب */
+.top-back-cards {
+    top: -28px !important;
+}
+
+.side-back-cards {
+    top: -18px !important;
+    margin-top: 0 !important;
+}
+
+/* تجميع يمين ويسار */
+.left-side .stack,
+.right-side .stack {
+    margin-top: 12px !important;
+    width: 58px !important;
+    height: 82px !important;
+    font-size: 28px !important;
+}
+
+/* تجميع اللاعب العلوي */
+.top-stack-row {
+    margin-top: 6px !important;
+}
+
+
+/* =========================================================
+   Mujabeed polished layout + entry screen + sounds UI
+   ========================================================= */
+
+html {
+    box-sizing: border-box;
+    overflow-y: hidden;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Tahoma, sans-serif;
+    direction: rtl;
+    text-align: center;
+    background: #444;
+    color: white;
+}
+
+/* شاشة الدخول */
+.entry-screen,
+.login-screen {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at center, rgba(255,255,255,.18), transparent 38%),
+        linear-gradient(135deg, #2f2f2f, #151515);
+}
+
+.entry-card,
+.login-card {
+    width: min(430px, 92vw);
+    padding: 32px 26px;
+    border-radius: 28px;
+    background: linear-gradient(#f0dfc2, #c7a36f);
+    color: #21150b;
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.7);
+    border: 1px solid rgba(255,255,255,.35);
+}
+
+.entry-logo {
+    width: 92px;
+    height: 92px;
+    margin: 0 auto 10px;
+    border-radius: 26px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: center;
+    color: #f7d58a;
+    background: linear-gradient(#4c3b2b, #1d1711);
+    box-shadow:
+        inset 0 2px 2px rgba(255,255,255,.18),
+        0 8px 18px rgba(0,0,0,.35);
+}
+
+.entry-card h1,
+.login-card h1 {
+    margin: 8px 0;
+    font-size: 42px;
+    color: #2b1c10;
+}
+
+.entry-card p,
+.login-subtitle {
+    color: #5b4328;
+    margin: 0 0 18px;
+    font-weight: bold;
+}
+
+.entry-actions,
+.auth-form-block form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.entry-card button,
+.login-card button,
+.room-card button,
+.menu button {
+    margin: 0;
+    padding: 13px 18px;
+    border-radius: 16px;
+    border: 0;
+    font-weight: bold;
+    font-size: 17px;
+    color: #21150b;
+    background: linear-gradient(#ffffff, #cfcfcf);
+    box-shadow: 0 4px 0 rgba(0,0,0,.25);
+    cursor: pointer;
+}
+
+.entry-card button:active,
+.login-card button:active,
+.room-card button:active,
+.menu button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(0,0,0,.25);
+}
+
+.secondary-btn {
+    background: linear-gradient(#665545, #36291f) !important;
+    color: #fff !important;
+}
+
+.auth-form-block input {
+    padding: 13px;
+    border: 1px solid #aa8d65;
+    border-radius: 14px;
+    font-size: 16px;
+    outline: none;
+}
+
+/* الحاوية العامة مثل فكرة كملنا */
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    min-width: 1024px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* اللوحة اليسرى */
+.left-panel {
+    position: fixed !important;
+    top: 22px !important;
+    left: 22px !important;
+    width: 348px !important;
+    height: auto !important;
+    z-index: 9999 !important;
+    background: linear-gradient(180deg, #2a3655 0%, #121a2b 100%);
+    border-radius: 22px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow:
+        0 16px 38px rgba(0,0,0,.36),
+        inset 0 1px 0 rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.08);
+}
+
+.side-panel {
+    position: static !important;
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px !important;
+    background: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+.panel-btn {
+    width: auto !important;
+    height: 56px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 14px !important;
+    font-size: 13px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: linear-gradient(180deg, #f9efc5, #d7ae59) !important;
+    color: #2a1803 !important;
+    font-weight: 800 !important;
+    box-shadow: 0 6px 14px rgba(0,0,0,.18);
+    letter-spacing: 0.2px;
+}
+
+.score-panel {
+    position: static !important;
+    width: 100% !important;
+    background: linear-gradient(180deg, #253652, #0f1523);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 10px 22px rgba(0,0,0,.32);
+}
+
+.score-panel table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    color: #fff;
+}
+
+.score-panel th {
+    background: rgba(255,255,255,.06);
+    padding: 10px 8px;
+    font-size: 16px;
+    color: #dfe8ff;
+}
+
+.score-panel td {
+    padding: 12px 10px;
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+}
+
+/* الطاولة */
+.game-table {
+    width: 930px !important;
+    height: 770px !important;
+    min-height: 770px !important;
+    position: absolute !important;
+    top: 18px !important;
+    left: 392px !important;
+    margin: 0 !important;
+    background:
+        radial-gradient(circle at 50% 16%, rgba(255,255,255,.12), transparent 18%),
+        radial-gradient(circle at center, rgba(255,255,255,.08), transparent 55%),
+        linear-gradient(180deg, #d8b07a 0%, #9c6944 100%) !important;
+    border-radius: 22px !important;
+    overflow: hidden !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.08),
+        0 18px 42px rgba(0,0,0,.3);
+    border: 1px solid rgba(255,255,255,.08);
+    transform-origin: top left;
+    transform: scale(
+        min(
+            1,
+            calc((100vw - 420px) / 930),
+            calc((100vh - 40px) / 770)
+        )
+    );
+}
+
+/* اللاعب العلوي */
+.top-player {
+    position: absolute !important;
+    top: 68px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
+    z-index: 25 !important;
+}
+
+/* الصف الأوسط */
+.middle-row {
+    position: absolute !important;
+    top: 225px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 275px !important;
+    margin: 0 !important;
+    display: block !important;
+}
+
+.left-side {
+    position: absolute !important;
+    left: 22px !important;
+    top: 35px !important;
+    width: 115px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    z-index: 25 !important;
+}
+
+.right-side {
+    position: absolute !important;
+    right: 22px !important;
+    top: 35px !important;
+    width: 115px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    z-index: 25 !important;
+}
+
+/* الميدان */
+.field {
+    position: absolute !important;
+    top: 30px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 650px !important;
+    min-height: 178px !important;
+    padding: 16px !important;
+    background:
+        radial-gradient(circle at center, rgba(255,255,255,.04), transparent 38%),
+        linear-gradient(180deg, #8a5a3b, #5c3a22) !important;
+    border: 2px solid rgba(255,255,255,.72) !important;
+    border-radius: 18px !important;
+    z-index: 10 !important;
+    box-shadow:
+        inset 0 0 18px rgba(0,0,0,.22),
+        0 0 0 1px rgba(255,255,255,.06),
+        0 8px 18px rgba(0,0,0,.18);
+}
+
+.field h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff7d8;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+    letter-spacing: 0.5px;
+}
+
+.field-cards {
+    min-height: 96px !important;
+    gap: 8px !important;
+    padding: 10px 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    flex-wrap: nowrap !important;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.06));
+}
+
+.field .card {
+    width: 56px !important;
+    height: 78px !important;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,.18));
+}
+
+.field .card-image {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* تجميع اللاعب: فوق صورته */
+.my-stack {
+    position: absolute !important;
+    right: 34px !important;
+    bottom: 116px !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    z-index: 55 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.my-stack h3 {
+    display: none !important;
+}
+
+.my-stack .stack {
+    width: 60px !important;
+    height: 84px !important;
+    margin: 0 !important;
+    font-size: 25px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.my-stack .simple-card-image {
+    width: 58px !important;
+    height: 82px !important;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.22);
+}
+
+/* أوراق اليد */
+.cards-wrapper {
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 116px !important;
+    transform: translateX(-50%) !important;
+    z-index: 15 !important;
+    padding: 0 18px !important;
+}
+
+.cards {
+    width: 660px !important;
+    height: 172px !important;
+    top: 0 !important;
+    padding: 0 10px !important;
+}
+
+/* صندوق اللاعب السفلي */
+.my-cards {
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 0 !important;
+    transform: translateX(-50%) !important;
+    width: 560px !important;
+    height: 145px !important;
+    z-index: 35 !important;
+    background:
+        linear-gradient(180deg, #5a5a5a 0%, #232323 100%);
+    border-radius: 22px 22px 0 0;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 -6px 16px rgba(0, 0, 0, 0.42);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bottom-profile {
+    position: absolute !important;
+    right: 18px !important;
+    bottom: 48px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 10px !important;
+    direction: ltr !important;
+}
+
+.bottom-avatar {
+    width: 76px !important;
+    height: 76px !important;
+    border-radius: 50%;
+    border: 3px solid #d8b36a;
+    background: #fff;
+    position: relative;
+    top: -36px;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+}
+
+.bottom-name {
+    color: #fff;
+    font-size: 17px;
+    font-weight: 800;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #3d3d3d, #171717);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 4px 10px rgba(0, 0, 0, 0.28);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.06);
+    position: relative;
+    top: -55px;
+}
+
+.action-buttons {
+    margin-top: 72px !important;
+    gap: 15px !important;
+}
+
+.action-buttons button {
+    width: 142px !important;
+    height: 46px !important;
+    font-size: 15px !important;
+    margin: 0 !important;
+    border-radius: 14px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.2px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.action-buttons button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24);
+}
+
+/* صناديق اللاعبين */
+.player-card {
+    width: 90px !important;
+    min-height: 94px !important;
+    padding: 7px !important;
+    background: linear-gradient(180deg, #f7f3e3, #d2bea0);
+    border-radius: 16px;
+    text-align: center;
+    box-shadow:
+        0 6px 12px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.42);
+    position: relative;
+    z-index: 5;
+}
+
+.player-avatar {
+    width: 58px !important;
+    height: 58px !important;
+    border-radius: 50%;
+    border: 3px solid #f4f0de;
+    background: #fff;
+    object-fit: cover;
+}
+
+.player-name {
+    color: #1f1f1f;
+    background: linear-gradient(180deg, #ffffff, #e7e2d2);
+    border-radius: 999px;
+    padding: 4px 10px !important;
+    font-size: 12px !important;
+    font-weight: 800;
+    display: inline-block;
+    width: fit-content;
+    max-width: 120px;
+    margin: 6px auto 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+/* تجميع اللاعبين الجانبيين */
+.left-side .stack,
+.right-side .stack {
+    margin-top: 12px !important;
+    width: 58px !important;
+    height: 82px !important;
+    font-size: 28px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* تجميع اللاعب العلوي */
+.top-stack-row {
+    margin-top: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* أوراق الخلفية */
+.back-card {
+    width: 42px;
+    height: 60px;
+    border-radius: 6px;
+    border: 2px solid white;
+    background: repeating-linear-gradient(
+        45deg,
+        #123b5c,
+        #123b5c 4px,
+        #e8f1f8 4px,
+        #e8f1f8 7px
+    );
+}
+
+.top-back-cards,
+.side-back-cards {
+    position: absolute !important;
+    z-index: 1;
+}
+
+.top-back-cards {
+    top: -28px !important;
+}
+
+.side-back-cards {
+    top: -18px !important;
+    margin-top: 0 !important;
+}
+
+/* الشاشات الصغيرة */
+@media (max-width: 900px) {
+    body {
+        overflow: auto;
+    }
+
+    #game-container {
+        min-width: 0;
+        overflow: visible;
+    }
+
+    .left-panel {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: min(340px, 95vw) !important;
+        height: auto !important;
+        margin: 10px auto !important;
+    }
+
+    .game-table {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        margin: 10px auto !important;
+        width: 930px !important;
+        height: 770px !important;
+        transform-origin: top center;
+        transform: scale(
+            min(
+                1,
+                calc(95vw / 930),
+                calc((100vh - 40px) / 770)
+            )
+        );
+    }
+}
+
+
+/* ==============================
+   FINAL FIX: objection timer, button, result screen
+   ============================== */
+
+/* صندوق مؤقت الاعتراض في زاوية الطاولة */
+#objection-box {
+    position: absolute !important;
+    top: 14px !important;
+    right: 14px !important;
+
+    width: 150px !important;
+    min-height: 62px !important;
+    height: auto !important;
+    line-height: normal !important;
+
+    margin: 0 !important;
+    padding: 8px 10px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    background: linear-gradient(180deg, #3d3427, #171717) !important;
+    border: 2px solid #ffd75a !important;
+    border-radius: 18px !important;
+    box-shadow:
+        0 6px 14px rgba(0,0,0,.46),
+        inset 0 1px 2px rgba(255,255,255,.12),
+        0 0 0 1px rgba(255,215,90,.08) !important;
+
+    color: #fff !important;
+    z-index: 999 !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#objection-box.show {
+    opacity: 1 !important;
+}
+
+#objection-box .timer-title {
+    font-size: 14px !important;
+    font-weight: bold !important;
+    color: #ffd75a !important;
+    margin-bottom: 4px !important;
+}
+
+#objection-box .timer-number {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: #ffd75a !important;
+    color: #111 !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* زر الاعتراض واضح دائمًا إذا عندك ورقة اعتراض */
+.objection-btn {
+    position: absolute !important;
+    right: 22px !important;
+    bottom: 170px !important;
+
+    width: 145px !important;
+    height: 50px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    border-radius: 18px !important;
+    border: 2px solid #fff2a8 !important;
+    background: linear-gradient(#ffe477, #d79a17) !important;
+    color: #1b1200 !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,.45) !important;
+    z-index: 1000 !important;
+}
+
+/* شاشة النتيجة */
+.result-screen {
+    width: 100vw !important;
+    height: 100vh !important;
+    background: radial-gradient(circle at center, #74512f 0%, #2b2b2b 72%) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    direction: rtl !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.result-card {
+    width: min(470px, 92vw) !important;
+    background: linear-gradient(#3d3d3d, #181818) !important;
+    border-radius: 28px !important;
+    padding: 30px 24px !important;
+    color: #fff !important;
+    text-align: center !important;
+    box-shadow: 0 12px 34px rgba(0,0,0,.58) !important;
+    border: 2px solid rgba(255,255,255,.15) !important;
+}
+
+.result-card.win {
+    border-color: #ffd75a !important;
+}
+
+.result-card.lose {
+    border-color: #ff7777 !important;
+}
+
+.result-card.draw {
+    border-color: #ddd !important;
+}
+
+.result-icon {
+    font-size: 52px !important;
+    margin-bottom: 8px !important;
+}
+
+.result-card h1 {
+    margin: 0 0 10px !important;
+    font-size: 30px !important;
+}
+
+.result-card h2 {
+    margin: 0 0 22px !important;
+    font-size: 26px !important;
+    color: #ffd75a !important;
+}
+
+.result-score {
+    display: flex !important;
+    gap: 14px !important;
+    justify-content: center !important;
+    margin-bottom: 24px !important;
+}
+
+.result-score div {
+    width: 145px !important;
+    background: rgba(255,255,255,.08) !important;
+    border-radius: 16px !important;
+    padding: 12px !important;
+}
+
+.result-score span {
+    display: block !important;
+    color: #ddd !important;
+    font-size: 16px !important;
+    margin-bottom: 6px !important;
+}
+
+.result-score strong {
+    font-size: 34px !important;
+    color: #fff !important;
+}
+
+.result-actions {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 12px !important;
+}
+
+.result-actions button {
+    width: 145px !important;
+    height: 46px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 16px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+}
