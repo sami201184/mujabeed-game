@@ -22,6 +22,75 @@ let selectedDecks = 1;
 let roundEnded = false;
 let chatMessages = [];
 
+
+const AUTH_STORAGE_KEY = "mujabeedUser";
+const TOKEN_STORAGE_KEY = "mujabeedToken";
+
+function getAuthToken() {
+    return localStorage.getItem(TOKEN_STORAGE_KEY) || "";
+}
+
+function saveAuthSession(user, token) {
+    currentUser = user;
+    if (token) {
+        currentUser.token = token;
+        localStorage.setItem(TOKEN_STORAGE_KEY, token);
+    }
+    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(currentUser));
+}
+
+function clearAuthSession() {
+    currentUser = null;
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+    localStorage.removeItem(TOKEN_STORAGE_KEY);
+}
+
+async function apiRequest(url, options = {}) {
+    const headers = {
+        "Content-Type": "application/json",
+        ...(options.headers || {})
+    };
+
+    const token = getAuthToken();
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
+    }
+
+    const response = await fetch(url, {
+        ...options,
+        headers
+    });
+
+    let data = {};
+    try {
+        data = await response.json();
+    } catch (e) {
+        data = {};
+    }
+
+    if (!response.ok) {
+        throw new Error(data.message || "حدث خطأ في الاتصال");
+    }
+
+    return data;
+}
+
+function setButtonLoading(button, isLoading, loadingText = "جاري التنفيذ...") {
+    if (!button) return;
+
+    if (isLoading) {
+        button.dataset.oldText = button.textContent;
+        button.disabled = true;
+        button.textContent = loadingText;
+    } else {
+        button.disabled = false;
+        if (button.dataset.oldText) {
+            button.textContent = button.dataset.oldText;
+        }
+    }
+}
+
+
 function escapeHtml(str) {
     return String(str)
         .replace(/&/g, "&amp;")
@@ -292,13 +361,16 @@ function showEntryPage() {
 function continueAsGuest() {
     const guestId = Math.floor(Math.random() * 9000 + 1000);
     currentUser = {
+        id: null,
         name: "ضيف " + guestId,
-        password: "guest"
+        isGuest: true
     };
 
-    localStorage.setItem("mujabeedUser", JSON.stringify(currentUser));
+    localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(currentUser));
+    localStorage.removeItem(TOKEN_STORAGE_KEY);
     showMainMenu();
 }
+
 
 
 function createRoom() {
@@ -372,33 +444,50 @@ function showRegisterPage() {
     `;
 }
 
-function loginUser() {
+async function loginUser() {
     const name = document.getElementById("loginName")?.value.trim();
     const password = document.getElementById("loginPassword")?.value.trim();
     const errorBox = document.getElementById("loginError");
+    const submitBtn = document.querySelector("#loginSection button[type='submit']");
+
+    if (errorBox) errorBox.textContent = "";
 
     if (!name || !password) {
         if (errorBox) errorBox.textContent = "يرجى إدخال الاسم وكلمة المرور";
         return;
     }
 
-    const savedUsers = JSON.parse(localStorage.getItem("mujabeedUsers") || "[]");
-    const isRegisteredUser = savedUsers.some(user => user.name === name && user.password === password);
+    try {
+        setButtonLoading(submitBtn, true, "جاري الدخول...");
 
-    if (!isRegisteredUser) {
-        if (errorBox) errorBox.textContent = "اسم المستخدم أو كلمة المرور غير صحيحة";
-        return;
+        const data = await apiRequest("/api/login", {
+            method: "POST",
+            body: JSON.stringify({
+                username: name,
+                password
+            })
+        });
+
+        saveAuthSession(data.user, data.token);
+        showMainMenu();
+    } catch (err) {
+        if (errorBox) errorBox.textContent = err.message || "تعذر تسجيل الدخول";
+    } finally {
+        setButtonLoading(submitBtn, false);
     }
-
-    currentUser = { name, password };
-    localStorage.setItem("mujabeedUser", JSON.stringify(currentUser));
-    showMainMenu();
 }
 
-function registerUser() {
+
+async function registerUser() {
     const name = document.getElementById("registerName")?.value.trim();
     const password = document.getElementById("registerPassword")?.value.trim();
     const errorBox = document.getElementById("registerError");
+    const submitBtn = document.querySelector("#registerSection button[type='submit']");
+
+    if (errorBox) {
+        errorBox.textContent = "";
+        errorBox.style.color = "";
+    }
 
     if (!name || !password) {
         if (errorBox) errorBox.textContent = "يرجى إدخال الاسم وكلمة المرور";
@@ -410,20 +499,37 @@ function registerUser() {
         return;
     }
 
-    const savedUsers = JSON.parse(localStorage.getItem("mujabeedUsers") || "[]");
+    try {
+        setButtonLoading(submitBtn, true, "جاري التسجيل...");
 
-    if (savedUsers.some(user => user.name === name)) {
-        if (errorBox) errorBox.textContent = "هذا الاسم موجود مسبقاً";
-        return;
+        await apiRequest("/api/register", {
+            method: "POST",
+            body: JSON.stringify({
+                username: name,
+                password
+            })
+        });
+
+        if (errorBox) {
+            errorBox.style.color = "#16a34a";
+            errorBox.textContent = "تم إنشاء الحساب بنجاح، يمكنك تسجيل الدخول الآن";
+        }
+
+        setTimeout(() => {
+            showLoginPage();
+            const loginName = document.getElementById("loginName");
+            if (loginName) loginName.value = name;
+        }, 900);
+    } catch (err) {
+        if (errorBox) {
+            errorBox.style.color = "";
+            errorBox.textContent = err.message || "تعذر إنشاء الحساب";
+        }
+    } finally {
+        setButtonLoading(submitBtn, false);
     }
-
-    savedUsers.push({ name, password });
-    localStorage.setItem("mujabeedUsers", JSON.stringify(savedUsers));
-
-    if (errorBox) errorBox.textContent = "تم إنشاء الحساب بنجاح";
-    document.getElementById("registerName").value = "";
-    document.getElementById("registerPassword").value = "";
 }
+
 
 function showMainMenu() {
     const userName = currentUser?.name || "اللاعب";
@@ -531,14 +637,24 @@ function showSettings() {
 }
 
 
-function logoutUser() {
-    currentUser = null;
-    localStorage.removeItem("mujabeedUser");
+async function logoutUser() {
+    try {
+        const token = getAuthToken();
+        if (token) {
+            await apiRequest("/api/logout", {
+                method: "POST"
+            });
+        }
+    } catch (e) {
+        console.warn("تعذر تسجيل الخروج من السيرفر:", e.message);
+    }
+
+    clearAuthSession();
     clearSavedGame();
     clearLastRoom();
-    localStorage.removeItem("mujabeedUser");
     showLoginPage();
 }
+
 
 function showJoinByCode() {
     document.body.innerHTML = `
@@ -2659,7 +2775,7 @@ socket.on("gameSynced", (data) => {
 
 window.addEventListener("load", () => {
     try {
-        const savedUser = localStorage.getItem("mujabeedUser");
+        const savedUser = localStorage.getItem(AUTH_STORAGE_KEY);
 
         if (savedUser) {
             currentUser = JSON.parse(savedUser);
@@ -2669,7 +2785,7 @@ window.addEventListener("load", () => {
         }
     } catch (e) {
         console.error(e);
-        localStorage.removeItem("mujabeedUser");
+        clearAuthSession();
         showEntryPage();
     }
 });
