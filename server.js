@@ -20,6 +20,28 @@ const pool = new Pool({
 
 const JWT_SECRET = process.env.JWT_SECRET || "mujabeed-secret";
 
+async function ensureUserStatsColumns() {
+    try {
+        await pool.query(`
+            ALTER TABLE users
+            ADD COLUMN IF NOT EXISTS wins INT DEFAULT 0,
+            ADD COLUMN IF NOT EXISTS losses INT DEFAULT 0,
+            ADD COLUMN IF NOT EXISTS points INT DEFAULT 0,
+            ADD COLUMN IF NOT EXISTS games_played INT DEFAULT 0,
+            ADD COLUMN IF NOT EXISTS weekly_points INT DEFAULT 0,
+            ADD COLUMN IF NOT EXISTS monthly_points INT DEFAULT 0,
+            ADD COLUMN IF NOT EXISTS last_game_at TIMESTAMP
+        `);
+
+        console.log("✅ جدول المستخدمين جاهز للإحصائيات");
+    } catch (err) {
+        console.error("❌ خطأ تجهيز أعمدة الإحصائيات:", err.message);
+    }
+}
+
+ensureUserStatsColumns();
+
+
 async function verifyActiveSession(token) {
     if (!token) return null;
 
@@ -90,32 +112,54 @@ function getOrCreateStats(username) {
     return playerStats.get(username);
 }
 
-function getLeaderboard() {
-    const now = Date.now();
-    const oneWeekAgo = now - 7 * 24 * 60 * 60 * 1000;
-    const oneMonthAgo = now - 30 * 24 * 60 * 60 * 1000;
+async function getLeaderboard() {
+    try {
+        const weeklyResult = await pool.query(`
+            SELECT username, COALESCE(weekly_points, 0) AS weekly_points
+            FROM users
+            ORDER BY COALESCE(weekly_points, 0) DESC, username ASC
+            LIMIT 1
+        `);
 
-    let allStats = Array.from(playerStats.values());
+        const monthlyResult = await pool.query(`
+            SELECT username, COALESCE(monthly_points, 0) AS monthly_points
+            FROM users
+            ORDER BY COALESCE(monthly_points, 0) DESC, username ASC
+            LIMIT 1
+        `);
 
-    // أفضل لاعب أسبوعياً
-    const topWeekly = allStats
-        .filter(s => s.lastGameDate >= oneWeekAgo)
-        .sort((a, b) => (b.weeklyPoints || 0) - (a.weeklyPoints || 0))[0];
+        const winnerResult = await pool.query(`
+            SELECT username, COALESCE(wins, 0) AS wins
+            FROM users
+            ORDER BY COALESCE(wins, 0) DESC, username ASC
+            LIMIT 1
+        `);
 
-    // أفضل لاعب شهرياً
-    const topMonthly = allStats
-        .filter(s => s.lastGameDate >= oneMonthAgo)
-        .sort((a, b) => (b.monthlyPoints || 0) - (a.monthlyPoints || 0))[0];
+        const weekly = weeklyResult.rows[0];
+        const monthly = monthlyResult.rows[0];
+        const winner = winnerResult.rows[0];
 
-    // أكثر اللاعبين فوزاً
-    const topWinner = allStats
-        .sort((a, b) => b.wins - a.wins)[0];
+        return {
+            weekly: weekly
+                ? { username: weekly.username, weeklyPoints: Number(weekly.weekly_points) || 0 }
+                : { username: "—", weeklyPoints: 0 },
 
-    return {
-        weekly: topWeekly || { username: "—", weeklyPoints: 0 },
-        monthly: topMonthly || { username: "—", monthlyPoints: 0 },
-        winner: topWinner || { username: "—", wins: 0 }
-    };
+            monthly: monthly
+                ? { username: monthly.username, monthlyPoints: Number(monthly.monthly_points) || 0 }
+                : { username: "—", monthlyPoints: 0 },
+
+            winner: winner
+                ? { username: winner.username, wins: Number(winner.wins) || 0 }
+                : { username: "—", wins: 0 }
+        };
+    } catch (err) {
+        console.error("❌ LEADERBOARD DB ERROR:", err.message);
+        return {
+            weekly: { username: "—", weeklyPoints: 0 },
+            monthly: { username: "—", monthlyPoints: 0 },
+            winner: { username: "—", wins: 0 }
+        };
+    }
 }
 
 function createRoomId() {
@@ -850,33 +894,56 @@ io.on("connection", (socket) => {
         emitRoomState(roomId, room);
     });
 
-    socket.on("gameEnded", (data) => {
+    socket.on("gameEnded", async (data) => {
         try {
-            // data = { winner: username, players: [{ username, score, points }, ...] }
-            if (!data || !data.players) return;
+            // data = { winner: username, players: [{ username, points, isWinner }, ...] }
+            if (!data || !Array.isArray(data.players)) return;
 
-            const now = Date.now();
+            const winnerName = data.winner || "";
 
-            data.players.forEach(p => {
-                if (!p.username || p.username === "كمبيوتر" || p.username.includes("كمبيوتر")) {
-                    return; // تجاهل البوتات
+            for (const p of data.players) {
+                const username = String(p.username || "").trim();
+
+                if (!username || username.includes("كمبيوتر")) {
+                    continue; // تجاهل البوتات
                 }
 
-                const stats = getOrCreateStats(p.username);
-                stats.gamesPlayed += 1;
-                stats.points += p.points || 0;
-                stats.monthlyPoints += p.points || 0;
-                stats.weeklyPoints += p.points || 0;
-                stats.lastGameDate = now;
+                const gainedPoints = Number(p.points || 0);
+                const isWinner = username === winnerName || p.isWinner === true;
 
-                if (p.username === data.winner) {
-                    stats.wins += 1;
-                } else {
-                    stats.losses += 1;
+                const result = await pool.query(
+                    "SELECT id FROM users WHERE username = $1",
+                    [username]
+                );
+
+                if (result.rows.length === 0) {
+                    console.log(`⚠️ اللاعب غير موجود في قاعدة البيانات: ${username}`);
+                    continue;
                 }
 
-                console.log(`📊 Updated stats for ${p.username}:`, stats);
-            });
+                await pool.query(
+                    `
+                    UPDATE users
+                    SET
+                        games_played = COALESCE(games_played, 0) + 1,
+                        points = COALESCE(points, 0) + $1,
+                        weekly_points = COALESCE(weekly_points, 0) + $1,
+                        monthly_points = COALESCE(monthly_points, 0) + $1,
+                        wins = COALESCE(wins, 0) + $2,
+                        losses = COALESCE(losses, 0) + $3,
+                        last_game_at = NOW()
+                    WHERE username = $4
+                    `,
+                    [
+                        gainedPoints,
+                        isWinner ? 1 : 0,
+                        isWinner ? 0 : 1,
+                        username
+                    ]
+                );
+
+                console.log(`📊 تم حفظ إحصائيات ${username}: +${gainedPoints} نقطة`);
+            }
 
             io.emit("leaderboardUpdated");
         } catch (error) {
@@ -884,8 +951,8 @@ io.on("connection", (socket) => {
         }
     });
 
-    socket.on("getLeaderboard", () => {
-        const leaderboard = getLeaderboard();
+    socket.on("getLeaderboard", async () => {
+        const leaderboard = await getLeaderboard();
         console.log("📋 Sending leaderboard:", leaderboard);
         io.to(socket.id).emit("leaderboardData", leaderboard);
     });
