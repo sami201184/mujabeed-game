@@ -8,6 +8,24 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 app.use(express.static(path.join(__dirname, "public")));
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+app.get("/style.css", (req, res) => {
+    res.type("text/css");
+    res.sendFile(path.join(__dirname, "public", "style.css"));
+});
+
+app.get("/app.js", (req, res) => {
+    res.type("application/javascript");
+    res.sendFile(path.join(__dirname, "public", "app.js"));
+});
+
+app.get("/socket.io/socket.io.js", (req, res) => {
+    res.type("application/javascript");
+    res.sendFile(path.join(__dirname, "node_modules", "socket.io", "client-dist", "socket.io.js"));
+});
 
 let waitingPlayers = [];
 const rooms = new Map();
