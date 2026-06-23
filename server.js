@@ -2,10 +2,50 @@ const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 const path = require("path");
+const { Pool } = require("pg");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require("uuid");
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+
+app.use(express.json());
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+});
+
+const JWT_SECRET = process.env.JWT_SECRET || "mujabeed-secret";
+
+async function verifyActiveSession(token) {
+    if (!token) return null;
+
+    const data = jwt.verify(token, JWT_SECRET);
+
+    const result = await pool.query(
+        "SELECT id, username FROM users WHERE id = $1",
+        [data.id]
+    );
+
+    const user = result.rows[0];
+    if (!user) return null;
+
+    const sessionResult = await pool.query(
+        "SELECT id FROM sessions WHERE user_id = $1 AND session_token = $2",
+        [data.id, data.sessionToken]
+    );
+
+    if (sessionResult.rows.length === 0) return null;
+
+    return {
+        id: user.id,
+        username: user.username,
+        sessionToken: data.sessionToken
+    };
+}
 
 app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
@@ -118,6 +158,138 @@ function emitRoomState(roomId, room) {
         playersCount: room.players.filter(Boolean).length
     });
 }
+
+
+app.post("/api/register", async (req, res) => {
+    try {
+        const username = String(req.body?.username || "").trim();
+        const password = String(req.body?.password || "").trim();
+
+        if (!username || !password) {
+            return res.status(400).json({ message: "أدخل الاسم وكلمة المرور" });
+        }
+
+        if (username.length < 3) {
+            return res.status(400).json({ message: "اسم المستخدم يجب أن يكون 3 أحرف على الأقل" });
+        }
+
+        if (password.length < 4) {
+            return res.status(400).json({ message: "كلمة المرور يجب أن تكون 4 أحرف على الأقل" });
+        }
+
+        const passwordHash = await bcrypt.hash(password, 10);
+
+        await pool.query(
+            "INSERT INTO users (username, password) VALUES ($1, $2)",
+            [username, passwordHash]
+        );
+
+        res.json({ message: "تم إنشاء الحساب" });
+    } catch (err) {
+        if (err.code === "23505") {
+            return res.status(400).json({ message: "الاسم مستخدم مسبقاً" });
+        }
+
+        console.error("❌ REGISTER ERROR:", err.message);
+        res.status(500).json({ message: "خطأ في السيرفر" });
+    }
+});
+
+app.post("/api/login", async (req, res) => {
+    try {
+        const username = String(req.body?.username || "").trim();
+        const password = String(req.body?.password || "").trim();
+
+        if (!username || !password) {
+            return res.status(400).json({ message: "أدخل الاسم وكلمة المرور" });
+        }
+
+        const result = await pool.query(
+            "SELECT * FROM users WHERE username = $1",
+            [username]
+        );
+
+        const user = result.rows[0];
+
+        if (!user) {
+            return res.status(400).json({ message: "الحساب غير موجود" });
+        }
+
+        const validPassword = await bcrypt.compare(password, user.password);
+
+        if (!validPassword) {
+            return res.status(400).json({ message: "كلمة المرور غير صحيحة" });
+        }
+
+        const activeSession = await pool.query(
+            "SELECT id FROM sessions WHERE user_id = $1 LIMIT 1",
+            [user.id]
+        );
+
+        if (activeSession.rows.length > 0) {
+            return res.status(403).json({
+                message: "الحساب مستخدم حالياً من جهاز آخر. سجل خروجك من الجهاز الأول ثم حاول مرة ثانية."
+            });
+        }
+
+        const sessionToken = uuidv4();
+
+        await pool.query(
+            "INSERT INTO sessions (user_id, session_token) VALUES ($1, $2)",
+            [user.id, sessionToken]
+        );
+
+        const token = jwt.sign(
+            { id: user.id, username: user.username, sessionToken },
+            JWT_SECRET,
+            { expiresIn: "7d" }
+        );
+
+        res.json({
+            token,
+            user: {
+                id: user.id,
+                name: user.username
+            }
+        });
+    } catch (err) {
+        console.error("❌ LOGIN ERROR:", err.message);
+        res.status(500).json({ message: "خطأ في السيرفر" });
+    }
+});
+
+app.post("/api/logout", async (req, res) => {
+    try {
+        const token = req.headers.authorization?.replace("Bearer ", "");
+        if (!token) return res.json({ ok: true });
+
+        const data = jwt.verify(token, JWT_SECRET);
+
+        await pool.query(
+            "DELETE FROM sessions WHERE user_id = $1 AND session_token = $2",
+            [data.id, data.sessionToken]
+        );
+
+        res.json({ ok: true });
+    } catch (err) {
+        res.json({ ok: true });
+    }
+});
+
+app.get("/api/me", async (req, res) => {
+    try {
+        const token = req.headers.authorization?.replace("Bearer ", "");
+        const user = await verifyActiveSession(token);
+
+        if (!user) {
+            return res.status(401).json({ message: "الجلسة غير صالحة" });
+        }
+
+        res.json({ user: { id: user.id, name: user.username } });
+    } catch (err) {
+        res.status(401).json({ message: "الجلسة غير صالحة" });
+    }
+});
 
 io.on("connection", (socket) => {
     console.log("لاعب دخل:", socket.id);
